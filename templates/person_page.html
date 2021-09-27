@@ -1,0 +1,116 @@
+{%extends 'base.html'%}
+{%load static%}
+
+{%block head%}
+<link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
+<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+{{block.super}}
+<script type="text/javascript" src="{% static 'js/person_page.js' %}"></script>
+{%endblock%}
+
+
+{%block person_description%}
+<div class="person-description">
+	<table class="person-description-table-base" style="margin-bottom: 26px;">
+		<tr>
+			<td colspan="2" style="text-align: left; color: #00BFFF;  font-size: 26px;"><b><a href="/person/id_{{person.person_id}}">{{person.username}}</a></b></td>
+		</tr>
+
+		<tr>
+			<!-- <td class="person-description-img-cell"></td> -->
+			<td colspan="2" style="text-align: left; color: #6E6E70; font-weight: bolder;">
+				{%if person.country == 'Неопределена' and person.city == 'Неопределен'%}
+				{{person.city}}
+				{%else%}
+				{{person.city}}, {{person.country}}
+				{%endif%}
+			</td>
+		</tr>
+		<tr>
+			<!-- <td class="person-description-img-cell"></td> -->
+			<td colspan="2" style="text-align: left; color: #6E6E70; font-weight: bolder;">
+				Дата регистрации: {{person.create_date|date:"d-m-Y"}}
+			</td>
+		</tr>
+		<!-- <tr>  style="position: absolute; margin-top: 10px; color: white; background: #00BFFF; border: hidden; border-radius: 6px; height: 29px; float: left;  width: 170px;	font-family: 'Ubuntu', sans-serif;
+					font-weight: 600px;"
+			<td class="person-description-img-cell"></td>
+			<td>
+				 Дата регистрации:
+			<span>{{person.create_date|date:"d-m-Y"}}</span>
+			</td>
+		</tr> style="text-align: center; border: hidden;"-->
+
+		{%if user.is_authenticated and user.person_id != person.person_id%}
+		{%if is_my_friend%}
+		<tr>
+			<td  colspan="2">
+				<input style="margin-top: 10px; color: white; background: #00BFFF; border: hidden; border-radius: 6px; height: 29px;  float:left; width: 170px;	font-family: 'Ubuntu', sans-serif;
+				font-weight: 600px;" class="add_freind" type="submit" value="У меня в друзьях">
+			</td>
+		</tr>
+		{%else%}
+		<tr>
+			<td colspan="2">
+				<form action="/add_freind" method="post">
+					{%csrf_token%}
+					<input type="text" name="friend" value="{{person}}" hidden>
+					<input style="margin-top: 10px; color: white; background: #00BFFF; border: hidden; border-radius: 6px; height: 29px;  float:left; width: 170px;	font-family: 'Ubuntu', sans-serif;
+					font-weight: 600px;" class="add_freind" type="submit" value="Добавить в друзья">
+				</form>
+			</td>
+		</tr>
+		{%endif%}
+		{%endif%}
+
+		<!-- {%if user.is_authenticated%}
+		<tr>
+			<td colspan="2">
+
+				<button style="margin-top: 1px; color: white; background: #00BFFF; border: hidden; border-radius: 6px; height: 29px;  float:left; width: 170px;" onclick="show_new_message_form()">Написать сообщение</button>
+
+			</td>
+		</tr>
+		{%endif%} -->
+
+	</table>
+
+</div>
+
+
+<!-- <div id="Wrap3" style="display: none;">
+	<div id="message-form1">
+		<table>
+			<form action="/new_message" method="post">
+				{%csrf_token%}
+				<input type="text" name="companion_id" value="{{person.person_id}}" hidden>
+				<input type="text" name="author_id" value="{{user.person_id}}" hidden>
+
+				<tr>
+					<td colspan="2" style="text-align: right; padding: 0">
+						<a href="#" onclick="close_new_message_form(); return false;" style="float: right; color: #00BFFF; border: hidden;">Закрыть</a>
+						                             <img src="{% static 'img/x_icon.png' %}"
+							                            onclick="close_new_message_form()">  
+						</td>
+				</tr>
+				<tr>
+					<td colspan="2">Ваше сообщение:</td>
+				</tr>
+				<tr>
+					<td colspan="2"><textarea id="text_area" maxlength="250" oninput="count_symbol_message()" name="message_text" required></textarea> </td>
+
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align:right; font-size: 10px;">
+						<span id="counter"></span>
+					</td>
+				</tr>
+				<tr>
+					<td colspan="2" style="text-align: right"><input style="color: white; background: #00BFFF; border: hidden; border-radius: 6px;" type="submit" name="" value="Отправить"></td>
+				</tr>
+			</form>
+		</table>
+	</div>
+
+</div> -->
+{%endblock%}

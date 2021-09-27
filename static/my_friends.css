@@ -1,0 +1,103 @@
+
+/* .info-line .my_friends{
+	border-bottom: 2px solid #0082A4;
+} */
+
+
+/* .person-wall{
+	width: 45%;
+	margin-left: 3%;
+	float: left;
+	background: white;
+	overflow-wrap: break-word;
+	box-sizing: border-box;
+	min-height: 40vh;
+
+} */
+
+.center-container{
+	display: table-cell;
+	padding-left: 10%;
+	width: 70%;
+	height: 950px;
+    background-color: white;
+	margin-left: 50%;
+}
+
+
+.friend_logo{
+	object-fit: cover;
+	height: 50px;
+	width: 50px;
+	border-radius: 25px;
+	border: 1px solid gray;
+}
+
+.person-wall table{
+	width: 100%;
+	border-spacing: 5px;
+}
+
+.person-wall table tr td{
+	padding: 0;
+	width: auto;
+}
+
+.person-wall table a{
+	text-decoration: none;
+	color: inherit;
+}
+
+.person-wall .person_name:hover{
+	color: #00BFFF;
+
+}
+
+.accept_refuse{
+	display: inline-block;
+	box-sizing: border-box;
+}
+.button {
+	margin-right: 5%;
+	text-align: center;
+	border-radius: 6px;
+	padding: 3px;
+	border: 2px solid #00BFFF;
+	font-weight: bold;
+	background: #00BFFF;
+	color: white;
+	cursor: pointer;
+
+}
+
+.button:hover{
+	color: white;
+	background: #00BFFF;
+}
+
+.all-friends td{
+	padding: 0;
+	width: auto;
+	text-align: center;	
+}
+
+.all-friends tr{
+	margin-right: 50px;
+}
+
+#table-all-friends{
+	margin-top: 80px;
+
+	box-sizing: border-box;
+	width: 715px;
+	background-color: white;
+	overflow: hidden;
+	padding: 20px;
+	margin-top: 23px;;
+	border-radius: 30px;
+	border: 1px solid rgba(128, 128, 128, 0.281);
+
+	transform: translateY(-1%);
+	/* top: 10%; */
+	/* transform: translateY(100%); */
+}

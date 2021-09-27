@@ -1,0 +1,334 @@
+<!doctype html>
+{%load static%}
+<html>
+
+<head>
+	{%block head%}
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<!-- <link rel="shortcut icon" href="img/repost.png" type="image/png"> -->
+	<link type="text/css" href="{% static 'base.css' %}" rel="stylesheet">
+	<link rel="stylesheet" type="text/css" href="{% static 'my_page.css' %}">
+	<link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+	<script type="text/javascript" src="{% static 'js/my_page.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/base.js' %}"></script>
+	<script type="text/javascript" src="{% static 'js/person_page.js' %}"></script>
+	{%endblock%}
+</head>
+
+<body>
+	<div id="main-container">
+		<div class="bg">
+		</div>
+		<div class="left-container">
+			<div id="avatar">
+				{%block logo_img%}
+				<div class="logo">
+					{%if person.show_avatar%}
+					<img src="{{person.show_avatar}}" id="avatar-img">
+					{%else%}
+					<img src="{% static 'img/avatar.png' %}" id="avatar-img">
+					{%endif%}
+				</div>
+				{%endblock%}
+				<div id="person-information" class="logo">
+					{%block person_description%}
+					<div class="person-description">
+						<table class="person-description-table-base" style="margin-bottom: 68px;">
+							<tr>
+								<td colspan="2">
+									<b><a href="/person/id_{{person.person_id}}"
+											style="text-align: left; color: #00BFFF; font-size: 26px;">{{person.username}}</a></b>
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align: left; color: #6E6E70; font-weight: bolder;">
+									{%if person.country == 'Неопределена' and person.city == 'Неопределен'%}
+									{{person.city}}
+									{%else%}
+									{{person.city}}, {{person.country}}
+									{%endif%}
+								</td>
+							</tr>
+							<tr>
+								<td colspan="2" style="text-align: left; color: #6E6E70; font-weight: bolder;">Дата
+									регистрации: {{person.create_date|date:"d-m-Y"}}</td>
+							</tr>
+						</table>
+					</div>
+					{%endblock%}
+				</div>
+			</div>
+			<div class="info-line">
+				{%if not user.is_authenticated%}
+				{%else%}
+				<table>
+					<tr class="table-names">
+						<td id="td-person">
+							<a href="/person/id_{{user.person_id}}"><span>Моя страница</span></a>
+						</td>
+						<td class="my_friends" id="td-person">
+							<a href="/my_friends"><span>
+									<span> Мои друзья <h4 class="number" id="count-fr">{{count_my_friends}}</h4></span>
+									{%if count_new_friends%}
+									<div class="new_friends">
+										+{{count_new_friends}}
+									</div>
+									{%endif%}
+								</span></a>
+						</td>
+						<td id="td-person">
+							<a href="/my_chats"><span>
+									<span> Мои беседы <h4 class="number">{{count_my_chats}}</h4></span>
+								</span></a>
+						</td>
+						<td id="td-person" style="margin-top: 20px;">
+							<a href="/my_settings"><span>Мои настройки</span></a>
+						</td>
+					</tr>
+				</table>
+				{%endif%}
+			</div>
+		</div>
+
+		<div class="center-container">
+			{%block person-wall%}
+			<div class="person-wall">
+				<div class="add-rec-and-search">
+					<div>
+						{%if user.is_authenticated%}
+						<button id="add_record" onclick="show_new_message_form()">Написать сообщение</button>
+						{%endif%}
+					</div>
+					<form action="/search">
+						<div id="search" onclick="search_style(event)">
+							<input id="search-line" type="search" placeholder="Поиск людей" name="search_name">
+							<input id="search-but" type="submit" value="">
+						</div>
+					</form>
+				</div>
+				<h1 id="my-page">Страница {{person.username}}</h1>
+				{%if user_records%}
+				{%for record in user_records%}
+				<div class="wall-record">
+					<div class="wall-record-logo">
+						<img src="{{record.0.user.avatar.url}}">
+					</div>
+					<div class="wall-record-info">
+						<table>
+							<tr>
+								<td>
+									<span style="font-size: 17px; font-weight: bold;">{{record.0.user.username}}</span>
+									<span style="color: #6E6E70; font-weight: bolder;"
+										class="date">{{record.0.date|date:"d-m-Y H:i"}}</span>
+								</td>
+							</tr>
+							<tr>
+								<td>
+									{%if record.0.author_record.username != record.0.user.username%}
+									<span style="font-size: 1.2em; color: #00BFFF">&#9997;</span>
+									<a class="author_link"
+										href="/person/id_{{record.0.author_record.person_id}}">{{record.0.author_record.username}}</a>
+									{%endif%}
+								</td>
+							</tr>
+							<tr>
+								<td>
+									<div class="wall-record-self">
+										<p>{{record.0.record_text}}</p>
+										{%if record.0.image%}
+										<img src="{{record.0.image.url}}">
+										{%endif%}
+									</div>
+								</td>
+							</tr>
+						</table>
+					</div>
+
+					<div class="wall-record-meta">
+						<div class="wall-record-like">
+							{%if user.is_authenticated%}
+							<img class="meta_img" onclick="ajax_meta_request('like', '{{record.0.id}}')"
+								src="{% static 'img/like.png' %}" title="Мне нравится!"><span
+								id="like_record_{{record.0.id}}"> {{record.1}}</span>
+							{%else%}
+							<img class="meta_img" src="{% static 'img/like.png' %}"><span> {{record.1}}</span>
+							{%endif%}
+						</div>
+						<div class="wall-record-repost">
+							{%if user.is_authenticated%}
+							<img class="meta_img" onclick="ajax_meta_request('repost', '{{record.0.id}}')"
+								src="{% static 'img/repost.png' %}" title="Мне нравится!"><span
+								id="repost_record_{{record.0.id}}"> {{record.2}}</span>
+							{%else%}
+							<img class="meta_img" src="{% static 'img/repost.png' %}"><span> {{record.2}}</span>
+							</form>
+							{%endif%}
+						</div>
+						<div class="wall-record-comment">
+							{%if user.is_authenticated%}
+							<img class="meta_img"
+								onclick="show_add_comment_form('{{record.0.id}}', '{{record.0.user.id}}')"
+								src="{% static 'img/comment.png' %}" title="Комментировать"><span
+								id="comment_count_record_{{record.0.id}}"> {{record.3}}</span>
+							{%else%}
+							<img class="meta_img" src="{% static 'img/comment.png' %}" title="Комментировать"><span
+								id="comment_count_record_{{record.0.id}}"> {{record.3}}</span>
+							{%endif%}
+						</div>
+					</div>
+
+					<div class="comments_box">
+						{%if record.4%}
+						<span style="text-decoration: underline; color: #00BFFF; cursor: pointer;"
+							id="verb_{{record.0.id}}"
+							onclick="show_comments('comments_{{record.0.id}}', 'verb_{{record.0.id}}')">Комментарии:</span>
+						{%else%}
+						<span style="text-decoration: underline; color: #00BFFF; cursor: pointer;"
+							id="verb_{{record.0.id}}"
+							onclick="show_comments('comments_{{record.0.id}}', 'verb_{{record.0.id}}')"></span>
+						{%endif%}
+						<div class="comments" id="comments_{{record.0.id}}" style="display: none;">
+							<table id="comment_record_{{record.0.id}}">
+								{%for comment in record.4%}
+								<tr>
+									<td class="comment_img">
+										<img src="{{comment.user.avatar.url}}">
+									</td>
+									<td><a href="/person/id_{{comment.user.person_id}}">{{comment.user.username}}</a>:
+									</td>
+								</tr>
+								<tr>
+									<td></td>
+									<td class="comments_table">
+										{{comment.text}}
+									</td>
+								</tr>
+								{%endfor%}
+							</table>
+						</div>
+					</div>
+				</div>
+
+				<div id="Wrap1" style="display: none;">
+					<div id="comment-form">
+						<table>
+							<form name="comment">
+								<input type="text" name="record_id" hidden>
+								<input type="text" name="author_record" hidden>
+								<tr>
+									<td colspan="2" style="text-align: left; padding: 0">
+										<a href="#" onclick="close_add_comment_form(); return false;"
+											style="float: right; color: #00BFFF; border: hidden;">Закрыть</a>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2">Оставить свой комментарий</td>
+								</tr>
+								<tr>
+									<td colspan="2"><textarea id="text_area" maxlength="140" oninput="count_symbol()"
+											name="comment_text" required></textarea> </td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:right; font-size: 10px;">
+										<span id="counter"></span>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align: right">
+										<button
+											style="color: white; background: #00BFFF; border: hidden; border-radius: 6px;"
+											onclick="ajax_message_request(); return false">Добавить</button>
+									</td>
+								</tr>
+							</form>
+						</table>
+					</div>
+				</div>
+
+				<div id="Wrap3" style="display: none;">
+					<div id="message-form">
+						<table>
+							<form action="/new_message" method="post">
+								{%csrf_token%}
+								<input type="text" name="companion_id" value="{{person.person_id}}" hidden>
+								<input type="text" name="author_id" value="{{user.person_id}}" hidden>
+				
+								<tr>
+									<td colspan="2" style="text-align: right; padding: 0">
+										<a href="#" onclick="close_new_message_form(); return false;" style="float: right; color: #00BFFF; border: hidden;">Закрыть</a>
+										<!-- <img src="{% static 'img/x_icon.png' %}"
+											onclick="close_new_message_form()">  -->
+										</td>
+								</tr>
+								<tr>
+									<td colspan="2">Ваше сообщение:</td>
+								</tr>
+								<tr>
+									<td colspan="2"><textarea id="text_area" maxlength="250" oninput="count_symbol_message()" name="message_text" required></textarea> </td>
+				
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align:right; font-size: 10px;">
+										<span id="counter"></span>
+									</td>
+								</tr>
+								<tr>
+									<td colspan="2" style="text-align: right"><input style="color: white; background: #00BFFF; border: hidden; border-radius: 6px;" type="submit" name="" value="Отправить"></td>
+								</tr>
+							</form>
+						</table>
+					</div>				
+				</div>
+
+				{%endfor%}
+				{%else%}
+				<div style="text-align: center">
+					<p>Нет ни одной записи</p>
+				</div>
+				{%endif%}
+			</div>
+			{%endblock%}
+		</div>
+
+		<div class="right-container">
+			<div class="login">
+				<span style="color: #6E6E70; font-weight: bolder;">Уже зарегистрированы? </span>
+				{%if user.is_anonymous%}
+				<a href="/" style="text-decoration: none; color: #6E6E70; font-weight: bolder;"><span
+					id="login-link"><span>&#8629;</span>  На главную</a>
+				<!-- <span onclick="show_login_block(event)" id="login-link"
+					style="text-decoration: none; color: #6E6E70; font-weight: bolder;">Войти<span>&#8595;</span> -->
+					{%else%}
+					<a href="/logout" style="text-decoration: none; color: #6E6E70; font-weight: bolder;"><span
+							id="login-link"><span>&#8629;</span>Выйти</a>
+					{%endif%}
+			</div>
+			{%block other_info%}
+			<div class="other-info">
+				<h1 id="friends-t"><a href="/person/id_{{person.person_id}}/friends">Друзья <b>{{person.username}}</b>
+						<h4 id="count-friends">{{count_friends}}</h4>
+					</a></h1>:
+				<br><br>
+				{%if person_friends%}
+				<table id="friends-table">
+					{%for friend in person_friends%}
+					<tr>
+						<td class="other-info-logo"><img src="{{friend.avatar.url}}"></td>
+						<td class="other-info-person-name"><a
+								href="/person/id_{{friend.person_id}}">{{friend.username}}</a></td>
+					</tr>
+					{%endfor%}
+				</table>
+				{%else%}
+				<span>Пока нет друзей ;(</span>
+				{%endif%}
+			</div>
+			{%endblock%}
+		</div>
+	</div>
+
+</body>
+
+</html>

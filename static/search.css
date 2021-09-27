@@ -1,0 +1,47 @@
+/* .person-wall{
+	width: 45%;
+	margin-left: 3%;
+	background: white;
+	overflow-wrap: break-word;
+	box-sizing: border-box;
+	min-height: 40vh;
+	display: inline-block;
+
+} */
+
+.center-container{
+	display: table-cell;
+	padding-left: 10%;
+	width: 50%;
+	height: 950px;
+    background-color: white;
+	margin-left: 30%;
+}
+
+#friends-search{
+	background-color: white;
+	overflow: hidden;
+	padding: 10px;
+	border-radius: 30px;
+	border: 1px solid rgba(128, 128, 128, 0.281);
+	box-sizing: border-box;
+}
+
+.friend_logo{
+	width: 40px;
+	height: 40px;
+	cursor: pointer;
+	object-fit: cover;
+	border-radius: 20px;
+	border: 1px solid gray;
+}
+
+.person-wall a{
+	color: inherit;
+	text-decoration: none;
+}
+
+.person-wall a:hover{
+	color: #0082A4;
+	text-decoration: underline;
+}

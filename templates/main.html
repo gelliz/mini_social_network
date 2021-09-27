@@ -1,0 +1,118 @@
+<!doctype html>
+{%load static%}
+<html>
+
+<head>
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+	<link rel="preconnect" href="https://fonts.gstatic.com/%22%3E">
+	<link href="https://fonts.googleapis.com/css2?family=Ubuntu:wght@300&display=swap" rel="stylesheet">
+	<link type="text/css" href="{% static 'main.css' %} " rel="stylesheet">
+	<script type="text/javascript" src="{% static 'js/main.js' %}"></script>
+</head>
+
+
+
+<body>
+
+	<!-- <div class="container" onclick="click_event()">
+<div class="header">
+	 <div class="header-list">
+		<ul>
+			<li><a href="">Главная</a></li> убрать, если что
+			<li><a href="">О нас</a></li>
+		</ul>
+	</div> 
+	<div class="login">
+
+	<table>
+		<tr>
+			<td>
+			<form action="/search">
+			
+				<div id="search" onclick="search_style(event)">
+					<input id="search-line" type="search" placeholder="Поиск" name="search_name"><input id="search-but" type="submit" value="">
+				</div>
+			
+			</form>
+		</tr>
+	</table>
+		
+	</div>
+	
+</div>
+
+<div class="header-img"> -->
+
+
+	<!-- <div class="slogan"> -->
+
+
+	<div class="bg2">
+
+	</div>
+
+	<!-- <div>
+		<span
+			style="position:relative; z-index: 2; margin-left: 18%; font-size: 100px; font-weight: bolder; color: white; transform: translateY(680%);">Собеседник</span>
+		<p></p>
+	</div> -->
+	<span
+	style="position:relative; z-index: 2; font-size: 100px; font-weight: bolder; color: white;margin-left: 380px;">Собеседник</span>
+<p></p>
+	<div id="login-block">
+
+
+
+		<table>
+			<form action="/login" method="post">
+				{%csrf_token%}
+				<tr>
+					<td>Уже зарегистрированы?</td>
+				</tr>
+				<tr>
+					<td><input style="border-radius: 10px; height: 30px; width: 500px;" class="enter" type="text"
+							name="email" placeholder="Адрес электронной почты"></td>
+				</tr>
+				<tr>
+					<td><input style="border-radius: 10px; height: 30px; width: 500px;" class="enter" type="password"
+							name="password" placeholder="Пароль"></td>
+				</tr>
+				<tr>
+					<td><input style="border-radius: 10px; height: 40px; width: 510px;" id="submit-in" type="submit"
+							value="Войти" onmouseover="button_style('log', 'mouseover')"
+							onmouseout="button_style('log', 'mouseout')"></td>
+				</tr>
+			</form>
+			<tr>
+				<td>
+					<hr style="width: 500px; margin-right: 145px;">
+				</td>
+			</tr>
+			<tr>
+				<td>Присоединяйтесь!</td>
+			</tr>
+
+			<tr>
+				<td> <input style="border-radius: 10px; height: 40px; width: 510px;" id="submit-reg" type="submit"
+						value="Регистрация" onmouseover="button_style('reg', 'mouseover')"
+						onmouseout="button_style('reg', 'mouseout')" onclick="window.open('/signup', '_self')"></td>
+			</tr>
+		</table>
+	</div>
+
+	</div>
+
+	</div>
+	<!-- <style>
+	#search{
+		background-color: red;
+	}
+	.header{
+		background-color: red;
+	}
+</style> -->
+</body>
+
+</html>
+<!-- <td> <div id="submit-reg" onmouseover="button_style('reg', 'mouseover')" onmouseout="button_style('reg', 'mouseout')" onclick="window.open('/signup', '_self')"><h1 id="reg">Регистрация</h1</div></td> -->

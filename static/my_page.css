@@ -1,0 +1,223 @@
+/* .person-wall{
+
+} */
+
+#my-page{
+	transform: translateY(-22%);
+	left: 50%;
+	transform: translateX(-4%); 
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 900px;
+}
+
+#add_record{
+	/* display: table-cell; */
+	float: right;
+	/* color: red;
+	cursor: pointer;
+	height: 25px;
+	padding: 5px;
+	background: #DCDCDC;
+	border: 2px solid gray;
+	border-radius: 5px; */
+	/* top: 40px;
+	left: 1181px; */
+	width: 190px;
+	height: 40px;
+	background: #00BFFF 0% 0% no-repeat padding-box;
+	border-radius: 6px;
+	border: none;
+	opacity: 1;
+	letter-spacing: 0.16px;
+	color:  #FFFFFF;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 600px;
+	font-size: 15px;
+
+	margin-left: 20%;
+}
+
+#add_record1{
+	/* display: table-cell; */
+	float: right;
+	/* color: red;
+	cursor: pointer;
+	height: 25px;
+	padding: 5px;
+	background: #DCDCDC;
+	border: 2px solid gray;
+	border-radius: 5px; */
+	/* top: 40px;
+	left: 1181px; */
+	width: 150px;
+	height: 40px;
+	background: #00BFFF 0% 0% no-repeat padding-box;
+	border-radius: 6px;
+	border: none;
+	opacity: 1;
+	letter-spacing: 0.16px;
+	color:  #FFFFFF;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 600px;
+	font-size: 15px;
+
+	margin-left: 20%;
+}
+
+#but-add-rec{
+	margin-right: 22%;
+	margin-top: 4%;;
+	float: right;
+}
+
+
+/* .person-wall #add_record:hover{
+	color: #0082A4;
+	cursor: pointer;
+	padding: 5px;
+	background: white;
+	border: 2px solid #0082A4;
+	border-radius: 5px;
+} */
+
+
+#record-form{
+	position: absolute;
+	width: 30%;
+	top: 40%;
+	left: 35%;
+	border: 1px solid gray;
+	border-radius: 6px;
+	background: white;
+}
+
+
+#record-form table{
+	padding-left: 5px;
+	width: 100%;
+}
+
+#record-form table tr td{
+	padding-bottom: 10px;
+	
+}
+#record-form .icon_col{
+	min-width: 30px;
+}
+#record-form .icon_col img{
+	width: 30px;
+} 
+
+#record-form img{
+	width: 20px;
+	cursor: pointer;
+}
+ 
+textarea{
+	width: 100%;
+	height: 20vh;
+	font-size: 1.2em;
+	box-sizing: border-box;
+	resize: none;
+}
+
+#file_name{
+	font-size: 11px;
+}
+
+.delete_record{
+	width: 100%;
+	cursor: pointer;
+}
+
+
+#Wrap{
+ z-index: 1000;
+ top: 0;
+ left:0;
+ /* transform: translateY(-80%); */
+ /* position:fixed; */
+ width: 100%;
+ height: 100%;
+ /* background: rgba(0, 0, 0, 0.5); */
+}
+
+.add-rec-and-search{
+	/* display: table; */
+	/* top: 2%; */
+	transform: translateY(-130%);
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 500px;
+}
+
+#search{
+	/* display: table-cell; */
+	/* height: 25px;
+	width: 500px; */
+	/* border-radius: 5px;
+	background: grey; */
+	/* width: 10%; */
+	/* border: 2px solid white; */
+	/* padding: 5px; */
+	/* padding-left: 15px;
+	padding-right: 15px; */
+	/* font-family: inherit;
+	margin-left: 5px;
+	margin-right: 150px; */
+
+
+	width: 540px;
+	height: 40px;
+	background: #FAF9F9 0% 0% no-repeat padding-box;
+	border-radius: 10px;
+	opacity: 1;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 600px;
+	font-size: 16px;
+	/* transform: translateY(40%); */
+	
+}
+
+#search1{
+	/* display: table-cell; */
+	/* height: 25px;
+	width: 500px; */
+	/* border-radius: 5px;
+	background: grey; */
+	/* width: 10%; */
+	/* border: 2px solid white; */
+	/* padding: 5px; */
+	/* padding-left: 15px;
+	padding-right: 15px; */
+	/* font-family: inherit;
+	margin-left: 5px;
+	margin-right: 150px; */
+
+
+	width: 520px;
+	height: 40px;
+	background: #FAF9F9 0% 0% no-repeat padding-box;
+	border-radius: 10px;
+	opacity: 1;
+	font-family: 'Ubuntu', sans-serif;
+	font-weight: 600px;
+	font-size: 16px;
+	/* transform: translateY(40%); */
+	
+}
+
+/* #search input[type="search"]{
+	width: 7%;
+	background: rgb(255, 255, 255);
+	border: none;
+
+} */
+
+/* #search input[type="submit"]{
+	width: 7%;
+	background: rgb(172, 10, 10);
+    background-size: cover; 
+	background-image: url('./img/search.png');
+	border: none;
+	cursor: pointer;	
+} */
